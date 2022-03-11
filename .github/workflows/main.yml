@@ -1,0 +1,33 @@
+name: Extract stolen bike from MAI
+
+on:
+    schedule:
+      - cron: "*/15 * * * *"
+      
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        container: python:3
+
+        steps:
+          - uses: actions/checkout@v2
+            with:
+              ref: ${{ github.head_ref }}
+          - name: Configure pt_PT locale
+            run: |
+              apt-get update -y && apt-get install -y locales && echo "pt_PT.UTF-8 UTF-8" | tee -a /etc/locale.gen && locale-gen pt_PT.UTF-8
+          - name: Configure pt_PT (Europe/Lisbon) timezone
+            run: |
+              ln -fs /usr/share/zoneinfo/Europe/Lisbon /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
+          - name: Install dependencies
+            run: |
+              python -m pip install --upgrade pip
+              python -m pip install -r requirements.txt
+          - name: Scrap stolen bikes
+            run: |
+              python perdidoseachados_extract_script.py
+          - name: Commit changes
+            uses: stefanzweifel/git-auto-commit-action@v4.1.1
+            with:
+                commit_message: Update stolen bikes
+                branch: ${{ github.head_ref }}
