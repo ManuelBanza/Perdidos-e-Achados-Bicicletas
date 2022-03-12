@@ -5,6 +5,20 @@ from requests.exceptions import ConnectionError
 from datetime import datetime
 from datetime import date
 import itertools
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
+
+
+software_names = [SoftwareName.CHROME.value]
+operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]   
+
+user_agent_rotator = UserAgent(software_names=software_names, operating_systems=operating_systems, limit=100)
+
+# Get list of user agents.
+user_agents = user_agent_rotator.get_user_agents()
+
+# Get Random User Agent String.
+user_agent = user_agent_rotator.get_random_user_agent()
 
 # Criar lista com os dias
 days = pd.date_range(end = pd.datetime.today(), periods=5, freq='D').strftime('%d-%m-%Y').tolist()
@@ -20,7 +34,7 @@ try:
     for day in days:
         headers = {
             'Host': 'perdidoseachados.mai.gov.pt',
-            'User-Agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
+            'User-Agent': user_agent,
             'Accept': 'application/xml, text/xml, */*; q=0.01',
             'Accept-Language': 'en-GB,en;q=0.5',
             'Accept-Encoding': 'gzip, deflate, br',
