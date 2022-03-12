@@ -1,8 +1,11 @@
 name: Extract bikes stolen
 
+- name: HTTP Request Action
+  uses: fjogeleit/http-request-action@v1.9.1
+
 on:
     schedule:
-      - cron: "*/5 * * * *"
+      - cron: "*/30 * * * *"
       
 jobs:
     build:
