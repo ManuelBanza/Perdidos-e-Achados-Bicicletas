@@ -20,7 +20,7 @@ try:
     for day in days:
         headers = {
             'Host': 'perdidoseachados.mai.gov.pt',
-            '   ': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
+            'User-Agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
             'Accept': 'application/xml, text/xml, */*; q=0.01',
             'Accept-Language': 'en-GB,en;q=0.5',
             'Accept-Encoding': 'gzip, deflate, br',
