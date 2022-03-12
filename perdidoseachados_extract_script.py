@@ -55,7 +55,7 @@ except:
     pass
 
 
-df_final.drop_duplicates(subset='NR_REGISTO', keep="first", inplace=True)
+df.drop_duplicates(subset='NR_REGISTO', keep="first", inplace=True)
 
 
 # Get today date now to file name when export to csv or excel with encoding utf8
