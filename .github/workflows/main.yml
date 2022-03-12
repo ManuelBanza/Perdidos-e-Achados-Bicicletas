@@ -1,8 +1,8 @@
-name: Extract stolen bike from MAI
+name: Extract bikes stolen
 
 on:
     schedule:
-      - cron: "*/15 * * * *"
+      - cron: "*/5 * * * *"
       
 jobs:
     build:
@@ -23,11 +23,11 @@ jobs:
             run: |
               python -m pip install --upgrade pip
               python -m pip install -r requirements.txt
-          - name: Scrap stolen bikes
+          - name: Scrap bikes stolen
             run: |
-              python perdidoseachados_extract_script.py
+              perdidoseachados_extract_script.py
           - name: Commit changes
             uses: stefanzweifel/git-auto-commit-action@v4.1.1
             with:
-                commit_message: Update stolen bikes
+                commit_message: Update bikes stolen
                 branch: ${{ github.head_ref }}
