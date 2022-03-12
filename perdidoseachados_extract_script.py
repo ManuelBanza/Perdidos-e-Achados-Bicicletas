@@ -60,4 +60,4 @@ df.drop_duplicates(subset='NR_REGISTO', keep="first", inplace=True)
 
 # Get today date now to file name when export to csv or excel with encoding utf8
 from datetime import datetime
-df.to_csv(datetime.now().strftime('data_sources/output/perdidoseachados_bicicletas-%Y-%m-%d-%H-%M-%S.csv'), encoding='utf8')
+df.to_csv(datetime.now().strftime('data_sources/data_transformed/perdidoseachados_bicicletas-%Y-%m-%d-%H-%M-%S.csv'), encoding='utf8')
